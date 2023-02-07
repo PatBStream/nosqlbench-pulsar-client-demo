@@ -1,0 +1,7 @@
+# ignore ALL .log files
+logs/
+bin/
+*.log
+_generated_*
+# ignore ALL files in ANY directory named temp
+temp/

@@ -1,0 +1,26 @@
+bindings:
+  # message key, property and value
+  int_prop_val: ToString(); Prefix("IntProp_")
+  text_prop_val: AlphaNumericString(5); Prefix("TextProp_")
+  # Do NOT use this one (big performance drop) compared with CharBufImage() function as below
+  ###mymsg_payload: AlphaNumericString(WeightedLongs("5120:80;6200:10;4000:10"));
+
+  # Use this one!
+  mymsg_payload: CharBufImage('A-Za-z0-9 _|/',1000000,WeightedLongs("420000:80;6200:10;4000:10"));
+
+# document level parameters that apply to all Pulsar client types:
+params:
+  async_api: "true"
+  seq_tracking: "true"
+
+blocks:
+  msg-produce-block:
+    ops:
+      op1:
+        MessageProduce: "tnt0/ns0/tp0"
+        msg_prop: |
+          {
+            "prop1": "{int_prop_val}",
+            "prop2": "{text_prop_val}"
+          }
+        msg_value: "{mymsg_payload}"
