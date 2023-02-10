@@ -1,0 +1,11 @@
+params:
+  async_api: "false"
+
+blocks:
+  msg-consume-block:
+    ops:
+      op1:
+        MessageConsume: "nb5pulsardemo/ns0/tp1"
+        consumerName: "myconsumer"
+        subscriptionName: "mynbsub"
+        subscriptionType: "Shared"
